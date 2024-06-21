@@ -1,0 +1,626 @@
+{
+    "openapi": "3.0.0",
+    "info": {
+        "title": "Library API",
+        "description": "API endpoints to manage library",
+        "contact": {
+            "email": "rinoridlojulianto@gmail.com"
+        },
+        "license": {
+            "name": "Apache 2.0",
+            "url": "https://www.apache.org/licenses/LICENSE-2.0.html"
+        },
+        "version": "1.0.0"
+    },
+    "paths": {
+        "/api/authors": {
+            "get": {
+                "tags": [
+                    "Authors"
+                ],
+                "summary": "Get all authors",
+                "operationId": "0c71439e213e1b284fc37995d74bca2b",
+                "responses": {
+                    "200": {
+                        "description": "List of authors",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "array",
+                                    "items": {
+                                        "$ref": "#/components/schemas/Author"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            "post": {
+                "tags": [
+                    "Authors"
+                ],
+                "summary": "Create a new author",
+                "operationId": "291d8539d3b5490d46fe9f2ebd84c64c",
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "required": [
+                                    "name",
+                                    "bio",
+                                    "birth_date"
+                                ],
+                                "properties": {
+                                    "name": {
+                                        "type": "string",
+                                        "example": "John Doe"
+                                    },
+                                    "bio": {
+                                        "type": "string",
+                                        "example": "Author biography"
+                                    },
+                                    "birth_date": {
+                                        "type": "string",
+                                        "format": "date",
+                                        "example": "1990-01-01"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "201": {
+                        "description": "Author created successfully",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/Author"
+                                }
+                            }
+                        }
+                    },
+                    "422": {
+                        "description": "Validation error",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "message": {
+                                            "type": "string",
+                                            "example": "Validation error"
+                                        },
+                                        "errors": {
+                                            "type": "object"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/api/authors/{id}": {
+            "get": {
+                "tags": [
+                    "Authors"
+                ],
+                "summary": "Get an author by ID",
+                "operationId": "c14c739d68f46a33acfd0694a12c27dc",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "ID of the author",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Author details",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/Author"
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            "put": {
+                "tags": [
+                    "Authors"
+                ],
+                "summary": "Update an existing author",
+                "operationId": "2a9f154a4061c0d3257520aba98221a5",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "ID of the author",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "required": [
+                                    "name",
+                                    "bio",
+                                    "birth_date"
+                                ],
+                                "properties": {
+                                    "name": {
+                                        "type": "string",
+                                        "example": "John Doe"
+                                    },
+                                    "bio": {
+                                        "type": "string",
+                                        "example": "Author biography"
+                                    },
+                                    "birth_date": {
+                                        "type": "string",
+                                        "format": "date",
+                                        "example": "1990-01-01"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "201": {
+                        "description": "Author updated successfully",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/Author"
+                                }
+                            }
+                        }
+                    },
+                    "422": {
+                        "description": "Validation error",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "message": {
+                                            "type": "string",
+                                            "example": "Validation error"
+                                        },
+                                        "errors": {
+                                            "type": "object"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            "delete": {
+                "tags": [
+                    "Authors"
+                ],
+                "summary": "Delete an author",
+                "operationId": "c04021713290d77b82e912ec58f94c36",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "ID of the author",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Author deleted successfully"
+                    }
+                }
+            }
+        },
+        "/api/authors/{id}/books": {
+            "get": {
+                "tags": [
+                    "Authors"
+                ],
+                "summary": "Get an author's detail & books by author's ID",
+                "operationId": "4fc16deccbe3f33e5ea6f4740f35cfbb",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "ID of the author",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Author details",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/AuthorWithBooks"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/api/books": {
+            "get": {
+                "tags": [
+                    "Books"
+                ],
+                "summary": "Get all books",
+                "operationId": "a9d13283dfab262e97af3c914d51b7a8",
+                "responses": {
+                    "200": {
+                        "description": "List of books",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "array",
+                                    "items": {
+                                        "$ref": "#/components/schemas/Book"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            "post": {
+                "tags": [
+                    "Books"
+                ],
+                "summary": "Create a new book",
+                "operationId": "47047e95a700b3271b697e57d0965191",
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "required": [
+                                    "title",
+                                    "description",
+                                    "publish_date",
+                                    "author_id"
+                                ],
+                                "properties": {
+                                    "title": {
+                                        "type": "string",
+                                        "example": "Example Book"
+                                    },
+                                    "description": {
+                                        "type": "string",
+                                        "example": "Book description"
+                                    },
+                                    "publish_date": {
+                                        "type": "string",
+                                        "format": "date",
+                                        "example": "2024-06-21"
+                                    },
+                                    "author_id": {
+                                        "type": "integer",
+                                        "example": 1
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "201": {
+                        "description": "Book created successfully",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/Book"
+                                }
+                            }
+                        }
+                    },
+                    "422": {
+                        "description": "Validation error",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "message": {
+                                            "type": "string",
+                                            "example": "Validation error"
+                                        },
+                                        "errors": {
+                                            "type": "object"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/api/books/{id}": {
+            "get": {
+                "tags": [
+                    "Books"
+                ],
+                "summary": "Get a book by ID",
+                "operationId": "2fdd668eb661591758aff4c56ca9b66a",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "ID of the book",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Book details",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/Book"
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            "put": {
+                "tags": [
+                    "Books"
+                ],
+                "summary": "Update an existing book",
+                "operationId": "f5ca658c501a803d68655af0365e3802",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "ID of the book",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "required": [
+                                    "title",
+                                    "description",
+                                    "publish_date",
+                                    "author_id"
+                                ],
+                                "properties": {
+                                    "title": {
+                                        "type": "string",
+                                        "example": "Example Book"
+                                    },
+                                    "description": {
+                                        "type": "string",
+                                        "example": "Book description"
+                                    },
+                                    "publish_date": {
+                                        "type": "string",
+                                        "format": "date",
+                                        "example": "2024-06-21"
+                                    },
+                                    "author_id": {
+                                        "type": "integer",
+                                        "example": 1
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "201": {
+                        "description": "Book updated successfully",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/Book"
+                                }
+                            }
+                        }
+                    },
+                    "422": {
+                        "description": "Validation error",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "message": {
+                                            "type": "string",
+                                            "example": "Validation error"
+                                        },
+                                        "errors": {
+                                            "type": "object"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            "delete": {
+                "tags": [
+                    "Books"
+                ],
+                "summary": "Delete a book",
+                "operationId": "1a9c26667c32b8ed5e5770d7a1cc9d5c",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "ID of the book",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Book deleted successfully"
+                    }
+                }
+            }
+        }
+    },
+    "components": {
+        "schemas": {
+            "Author": {
+                "title": "Author",
+                "required": [
+                    "id",
+                    "name",
+                    "bio",
+                    "birth_date"
+                ],
+                "properties": {
+                    "id": {
+                        "type": "integer",
+                        "example": 1
+                    },
+                    "name": {
+                        "type": "string",
+                        "example": "John Doe"
+                    },
+                    "bio": {
+                        "type": "string",
+                        "example": "Author biography"
+                    },
+                    "birth_date": {
+                        "type": "string",
+                        "format": "date",
+                        "example": "1990-01-01"
+                    }
+                },
+                "type": "object"
+            },
+            "AuthorWithBooks": {
+                "title": "AuthorWithBooks",
+                "required": [
+                    "id",
+                    "name",
+                    "bio",
+                    "birth_date",
+                    "created_at",
+                    "updated_at",
+                    "books"
+                ],
+                "properties": {
+                    "id": {
+                        "type": "integer",
+                        "example": 2
+                    },
+                    "name": {
+                        "type": "string",
+                        "example": "Tes 2"
+                    },
+                    "bio": {
+                        "type": "string",
+                        "example": "Lorem ipsum dolor sit amet"
+                    },
+                    "birth_date": {
+                        "type": "string",
+                        "format": "date",
+                        "example": "1996-07-22"
+                    },
+                    "created_at": {
+                        "type": "string",
+                        "format": "date-time",
+                        "example": "2024-06-21T04:08:27.000000Z"
+                    },
+                    "updated_at": {
+                        "type": "string",
+                        "format": "date-time",
+                        "example": "2024-06-21T04:08:27.000000Z"
+                    },
+                    "books": {
+                        "type": "array",
+                        "items": {
+                            "$ref": "#/components/schemas/Book"
+                        }
+                    }
+                },
+                "type": "object"
+            },
+            "Book": {
+                "title": "Book",
+                "required": [
+                    "id",
+                    "title",
+                    "description",
+                    "publish_date",
+                    "author_id"
+                ],
+                "properties": {
+                    "id": {
+                        "type": "integer",
+                        "example": 1
+                    },
+                    "title": {
+                        "type": "string",
+                        "example": "Example Book"
+                    },
+                    "description": {
+                        "type": "string",
+                        "example": "Book description"
+                    },
+                    "publish_date": {
+                        "type": "string",
+                        "format": "date",
+                        "example": "2024-06-21"
+                    },
+                    "author_id": {
+                        "type": "integer",
+                        "example": 1
+                    }
+                },
+                "type": "object"
+            }
+        }
+    }
+}
