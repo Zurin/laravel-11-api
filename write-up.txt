@@ -1,0 +1,7 @@
+I chose to use Laravel, because it is proven that this framework had built-in rich features that we could use to develop API/service faster and simpler.
+Also in this project I use service pattern, so it could be easier to maintain because we could put the logic, fetch from database/ redis, etc. on service layer.
+So the controller wouldn't be containing overwhelming very long code lines, just for input validation and calling each services if needed.
+
+For performance tuning, I've implemented caching in this project. So, if there's no data changes and the data is already stored on redis, the api should be fetching
+data from redis instead of database. And it should be faster because redis/ cache is in-memory based storage CMIIW. For further performance tuning that has not been implemented yet,
+I suggest that we could paginate the authors & books data if it reached millions. Also, we could index the table if needed for further optimization on fetching data.
